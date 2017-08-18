@@ -218,6 +218,7 @@
 			}
 
 		.image.featured {
+			height: 91px;
 			position: static;
 			display: block;
 			margin: 0;
