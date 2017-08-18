@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Js30 Day1</title>
+</head>
+
+<body>
+    <section>
+        <div data-key="65" class="key "> Do
+            <p>A</p>
+        </div>
+        <div data-key="83" class="key "> Re
+            <p>S</p>
+        </div>
+        <div data-key="68" class="key "> Mi
+            <p>D</p>
+        </div>
+        <div data-key="70" class="key "> Fa
+            <p>F</p>
+        </div>
+        <div data-key="74" class="key "> Sol
+            <p>J</p>
+        </div>
+        <div data-key="75" class="key "> La
+            <p>K</p>
+        </div>
+        <div data-key="76" class="key "> Si
+            <p>L</p>
+        </div>
+    </section>
+</body>
+
+<audio data-key="65" src="audio/C.mp3"></audio>
+<audio data-key="83" src="audio/D.mp3"></audio>
+<audio data-key="68" src="audio/E.mp3"></audio>
+<audio data-key="70" src="audio/F.mp3"></audio>
+<audio data-key="74" src="audio/G.mp3"></audio>
+<audio data-key="75" src="audio/A.mp3"></audio>
+<audio data-key="76" src="audio/B.mp3"></audio>
+
+<script type="text/javascript">
+function playAudio(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    key.classList.add('playing');
+};
+
+window.addEventListener('keydown', playAudio);
+
+function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+};
+
+var keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+</script>
+
+<style type="text/css">
+body {
+    background-image: url(image/bg.jpg);
+    background-size: 100%;
+}
+
+section {
+    position: absolute;
+    top: 40%;
+    width: 80%;
+    height: 20%;
+    border: 10px black outset;
+    padding: 2%;
+    margin-left: 8%;
+}
+
+.key {
+    font-size: 1200%;
+    height: 100%;
+    width: 12.4%;
+    margin-left: 1%;
+    border: 5px black outset;
+    display: inline;
+    float: left;
+    text-align: center;
+    background: #808080 url() 0 0 no-repeat;
+    transition: all 0.2s;
+}
+
+.key p {
+    font-size: 70%
+}
+
+.playing {
+    border-color: #ffc600;
+    box-shadow: 0 0 10px #ffc600;
+    transform: scale(1.1);
+}
+
+.
+</style>
+
+</html>
