@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>js30 Day3</title>
+</head>
+
+<body>
+    <h1>Text Color Picker</h1>
+    <div class="controls">
+        <label>Red:</label>
+        <input type="range" name="red" min="0" max="255" value="0" id="r">
+        <label>Green:</label>
+        <input type="range" name="green" min="0" max="255" value="0" id="g">
+        <label>Blue:</label>
+        <input type="range" name="blue" min="0" max="255" value="0" id="b">
+        <label>Size:</label>
+        <input type="range" name="fsize" min="0" max="200" value="80" data-sizing="px">
+    </div>
+</body>
+<script type="text/javascript">
+const inputs = document.querySelectorAll('.controls input');
+
+function handleUpdate() {
+    const suffix = this.dataset.sizing || '';
+    if (this.name != "fsize") {
+        var r = parseInt(document.getElementById("r").value);
+        var g = parseInt(document.getElementById("g").value);
+        var b = parseInt(document.getElementById("b").value);
+        var color = colorChange(r, g, b);
+
+        document.documentElement.style.setProperty(`--fcolor`, color);
+
+    } else {
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+}
+
+function colorChange(r, g, b) {
+    var colorArr = [r.toString(16), g.toString(16), b.toString(16)];
+
+    for (var i = colorArr.length - 1; i >= 0; i--) {
+        if (colorArr[i].length != 2) {
+            colorArr[i] = "0" + colorArr[i];
+        }
+    };
+
+    var result = "#";
+    colorArr.forEach(color => result += color);
+    return result;
+}
+
+
+
+
+inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+</script>
+<style type="text/css">
+:root {
+    --red: 0;
+    --blue: 0;
+    --green: 0;
+    --fsize: 80px;
+    --fcolor: #000000;
+}
+
+body {
+    background-image: url(bg.jpg);
+    background-size: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: var(--fsize);
+    color: var(--fcolor);
+}
+
+.controls {
+    text-align: center;
+}
+
+label {
+    font-size: 20px;
+    padding-left: 20px;
+}
+</style>
+
+</html>
